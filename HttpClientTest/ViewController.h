@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController 
+@interface ViewController : UIViewController
 
 @property(nonatomic, retain) IBOutlet UILabel* status;
-@property(nonatomic, retain) IBOutlet UITextView* response;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UITextField *username;
 
--(IBAction)retrieveResponseSync:(id)sender;
+
 -(IBAction)retrieveResponseAsync:(id)sender;
+- (IBAction)retrieveResponseSync:(id)sender;
+
 
 @end

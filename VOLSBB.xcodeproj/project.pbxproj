@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		16100DCF173194CA0054F5DF /* 144icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16100DCE173194CA0054F5DF /* 144icon.png */; };
 		16100DD1173194CE0054F5DF /* 72xicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16100DD0173194CE0054F5DF /* 72xicon.png */; };
-		161F752C1735695500F761DE /* iPhoneStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 161F752B1735695500F761DE /* iPhoneStoryboard.storyboard */; };
+		1612DF87173D695700C548C0 /* iPhoneStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1612DF86173D695700C548C0 /* iPhoneStoryboard.storyboard */; };
 		16D3C3DE17357BF5006412FC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D3C3DD17357BF5006412FC /* Default-568h@2x.png */; };
 		A55FFDF9144F2D4F000F9349 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55FFDF8144F2D4F000F9349 /* UIKit.framework */; };
 		A55FFDFB144F2D4F000F9349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55FFDFA144F2D4F000F9349 /* Foundation.framework */; };
@@ -24,7 +24,7 @@
 		16100DCE173194CA0054F5DF /* 144icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 144icon.png; sourceTree = "<group>"; };
 		16100DD0173194CE0054F5DF /* 72xicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 72xicon.png; sourceTree = "<group>"; };
 		16100DD2173194D60054F5DF /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		161F752B1735695500F761DE /* iPhoneStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhoneStoryboard.storyboard; sourceTree = "<group>"; };
+		1612DF86173D695700C548C0 /* iPhoneStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhoneStoryboard.storyboard; sourceTree = "<group>"; };
 		16D3C3DD17357BF5006412FC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A55FFDF4144F2D4F000F9349 /* VOLSBB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VOLSBB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A55FFDF8144F2D4F000F9349 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -89,10 +89,10 @@
 				A55FFE05144F2D4F000F9349 /* AppDelegate.h */,
 				A55FFE06144F2D4F000F9349 /* AppDelegate.m */,
 				A55FFE08144F2D4F000F9349 /* iPadStoryboard.storyboard */,
+				1612DF86173D695700C548C0 /* iPhoneStoryboard.storyboard */,
 				A55FFE0B144F2D4F000F9349 /* ViewController.h */,
 				A55FFE0C144F2D4F000F9349 /* ViewController.m */,
 				A55FFDFD144F2D4F000F9349 /* Supporting Files */,
-				161F752B1735695500F761DE /* iPhoneStoryboard.storyboard */,
 			);
 			path = HttpClientTest;
 			sourceTree = "<group>";
@@ -163,8 +163,8 @@
 				A55FFE0A144F2D4F000F9349 /* iPadStoryboard.storyboard in Resources */,
 				16100DCF173194CA0054F5DF /* 144icon.png in Resources */,
 				16100DD1173194CE0054F5DF /* 72xicon.png in Resources */,
-				161F752C1735695500F761DE /* iPhoneStoryboard.storyboard in Resources */,
 				16D3C3DE17357BF5006412FC /* Default-568h@2x.png in Resources */,
+				1612DF87173D695700C548C0 /* iPhoneStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

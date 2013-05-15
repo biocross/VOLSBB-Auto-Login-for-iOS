@@ -11,10 +11,8 @@
 @implementation ViewController
 
 
-@synthesize response;
-@synthesize status;
-@synthesize username;
-@synthesize password;
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -28,12 +26,19 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+    if([preferences stringForKey:@"usernameForVolsbbApp"]){
+        [_username setText:[preferences stringForKey:@"usernameForVolsbbApp"]] ;
+        [_password setText:[preferences stringForKey:@"passwordForVolsbbApp"]] ;
+    }
 }
 
 - (void)viewDidUnload
 {
-    [self setPassword:nil];
-    [self setUsername:nil];
+    //[self setPassword:nil];
+    //[self setUsername:nil];
+
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -71,7 +76,7 @@
 
 - (IBAction)retrieveResponseSync:(id)sender
 {
-    [status setText:@"Logging Out..."];
+    [_status setText:@"Logging Out..."];
     NSString *post = @"nothing";
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
@@ -92,13 +97,14 @@
 - (IBAction)retrieveResponseAsync:(id)sender 
 {
 //
-    
-    [status setText:@"Logging In...."];
+    [_username resignFirstResponder];
+    [_password resignFirstResponder];
+    [_status setText:@"Logging In...."];
     
     NSString *segment1 = @"userid=";
-    segment1 = [segment1 stringByAppendingString: username.text];
+    segment1 = [segment1 stringByAppendingString: _username.text];
     segment1 = [segment1 stringByAppendingString:@"&password="];
-    segment1 = [segment1 stringByAppendingString:password.text];
+    segment1 = [segment1 stringByAppendingString:_password.text];
     segment1 = [segment1 stringByAppendingString:@"&serviceName=ProntoAuthentication"];
     
     
@@ -121,6 +127,10 @@
     
 }
 
+
+
+
+
 - (void)connection:(NSURLConnection*) connection didReceiveResponse:(NSURLResponse *)response
 {
     NSLog(@"Response recieved");
@@ -129,17 +139,56 @@
 
 - (void)connection:(NSURLConnection*) connection didReceiveData:(NSData *)data
 {
+    [_username resignFirstResponder];
+    [_password resignFirstResponder];
     NSLog(@"Data recieved");    
     
-    //NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    //[response setText:responseString];
-    //[status setText:@"Logged in, or out, whatever you wanted.."];
+    NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Yay!" message:@"Logged In, or Out, whatever you wanted." delegate:self cancelButtonTitle:@"Roger That" otherButtonTitles: nil ];
+    if ([responseString rangeOfString:@"Successful Pronto Authentication"].location != NSNotFound) {
+        [_status setText:@"Logged in"];
+        NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+        [preferences removeObjectForKey:@"usernameForVolsbbApp"];
+        [preferences removeObjectForKey:@"passwordForVolsbbApp"];
+        [preferences setObject:_username.text forKey:@"usernameForVolsbbApp"];
+        [preferences setObject:_password.text forKey:@"passwordForVolsbbApp"];
+    }
+    else if ([responseString rangeOfString:@"You are already logged in"].location != NSNotFound){
+        [_status setText:@"Already Logged In"];
+    }
+    else if ([responseString rangeOfString:@"Logout successful"].location != NSNotFound){
+        [_status setText:@"Logged Out"];
+    }
+    else if ([responseString rangeOfString:@"Sorry, that account does not exist."].location != NSNotFound){
+        
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops." message:@"Sorry, that account does not exist." delegate:self cancelButtonTitle:@"Alright" otherButtonTitles: nil ];
     
-    [alert show];
+        [alert show];
+    
+    }
+    else if ([responseString rangeOfString:@"Sorry, please check your username and password and try again."].location != NSNotFound){
+        [_status setText:@"Invalid Username/Password"];
+    }
+    else if ([responseString rangeOfString:@"Logout Failure"].location != NSNotFound){
+        [_status setText:@"Already Logged Out"];
+    }
+
+    
+    
+    
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    UILocalNotification *loggedIn = [[UILocalNotification alloc] init];
+    if (loggedIn){
+        loggedIn.alertBody = @"Logged In, or Out, whatever you wanted.";
+    }
+    
+    [app presentLocalNotificationNow:loggedIn];
+    
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
+
+
 
 @end
